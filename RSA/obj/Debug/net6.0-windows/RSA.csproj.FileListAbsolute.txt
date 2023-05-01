@@ -1,0 +1,17 @@
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\bin\Debug\net6.0-windows\RSA.exe
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\bin\Debug\net6.0-windows\RSA.deps.json
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\bin\Debug\net6.0-windows\RSA.runtimeconfig.json
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\bin\Debug\net6.0-windows\RSA.dll
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\bin\Debug\net6.0-windows\RSA.pdb
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.csproj.AssemblyReference.cache
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.Form1.resources
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.csproj.GenerateResource.cache
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.AssemblyInfoInputs.cache
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.AssemblyInfo.cs
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.csproj.CoreCompileInputs.cache
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.dll
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\refint\RSA.dll
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.pdb
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\RSA.genruntimeconfig.cache
+C:\Users\iiigg\OneDrive\Рабочий стол\учёба\Univer\RSA\obj\Debug\net6.0-windows\ref\RSA.dll
