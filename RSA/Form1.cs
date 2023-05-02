@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using lab3;
+using System.Diagnostics;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
@@ -17,7 +19,7 @@ namespace RSA
 		{
 			InitializeComponent();
 		}
-		private long EulerFunction(long p, long q)
+		private BigInteger EulerFunction(BigInteger p, BigInteger q)
 		{
 			return ((p - 1) * (q - 1));
 		}
@@ -26,17 +28,17 @@ namespace RSA
 		{
 			try
 			{
-				long p = Convert.ToInt64(textBox1.Text);
-				long q = Convert.ToInt64(textBox2.Text);
-				if (IsPrimary(p) == false || IsPrimary(q) == false)
+				BigInteger p = BigInteger.Parse(textBox1.Text);
+				BigInteger q = BigInteger.Parse(textBox2.Text);
+				if (!MillerRabin.MillerRabinTest(p, 50) || !MillerRabin.MillerRabinTest(q, 50))
 				{
 					MessageBox.Show("p и q должны быть простыми");
 					return;
 				}
-				long mod = p * q;
-				long n = EulerFunction(p, q);
-				long _e = FindE(n);
-				long d = FindD(_e, n);
+				BigInteger mod = BigInteger.Multiply(p, q);
+				BigInteger n = EulerFunction(p, q);
+				BigInteger _e = FindE(n);
+				BigInteger d = FindD(_e, n);
 				textBox3.Text = n.ToString();
 				textBox4.Text = _e.ToString();
 				textBox5.Text = d.ToString();
@@ -44,7 +46,7 @@ namespace RSA
 				textBox7.Text = mod.ToString();
 				string message = textBox8.Text.ToUpper();
 				StringBuilder encryptedMessage = RSAEncode(message, _e, mod);
-				textBox9.Text = (encryptedMessage.ToString());
+				textBox9.Text = encryptedMessage.ToString();
 			}
 			catch
 			{
@@ -52,25 +54,30 @@ namespace RSA
 			}
 		}
 
-		private bool IsPrimary(long n)
+		public static BigInteger RandomBI(BigInteger min, BigInteger max)
 		{
-			if (n < 2)
-				return false;
-			for (long i = 2; i <= Math.Sqrt(n); i++)
-				if (n % i == 0)
-					return false;
-			return true;
-		}
-		private long FindE(long n)
-		{
-			Random random = new Random();
-			long e = random.Next(2, Convert.ToInt32(n));
+			var rng = new RNGCryptoServiceProvider();
+			var data = new byte[max.ToByteArray().Length];
+			BigInteger result;
 
-			for (long i = 2; i < n; i++)
+			do
+			{
+				rng.GetBytes(data);
+				result = new BigInteger(data);
+			} while (result < min || result >= max);
+
+			return result;
+		}
+
+		private BigInteger FindE(BigInteger n)
+		{
+			BigInteger e = RandomBI(2,n);
+
+			for (BigInteger i = 2; i < n; i++)
 			{
 				if ((n % i == 0) && (e % i == 0))
 				{
-					e = random.Next(2, Convert.ToInt32(n));
+					e = RandomBI(2, n);
 					i = 1;
 				}
 			}
@@ -78,22 +85,22 @@ namespace RSA
 			return e;
 		}
 
-		private long FindD(long e, long n)
+		private BigInteger FindD(BigInteger e, BigInteger n)
 		{
-			long d = invmod(e, n);
+			BigInteger d = invmod(e, n);
 			return d;
 		}
-		static (long, long, long) gcdex(long a, long b)
+		static (BigInteger, BigInteger, BigInteger) gcdex(BigInteger a, BigInteger b)
 		{
 			if (a == 0)
 				return (b, 0, 1);
-			(long gcd, long x, long y) = gcdex(b % a, a);
+			(BigInteger gcd, BigInteger x, BigInteger y) = gcdex(b % a, a);
 			return (gcd, y - (b / a) * x, x);
 		}
 
-		static long invmod(long a, long m)
+		static BigInteger invmod(BigInteger a, BigInteger m)
 		{
-			(long g, long x, long y) = gcdex(a, m);
+			(BigInteger g, BigInteger x, BigInteger y) = gcdex(a, m);
 			return g > 1 ? 0 : (x % m + m) % m;
 		}
 
@@ -101,16 +108,16 @@ namespace RSA
 		{
 			try
 			{
-				long d, mod;
+				BigInteger d, mod;
 				if (textBox12.Text.Length == 0 || textBox13.Text.Length == 0)
 				{
-					d = Convert.ToInt64(textBox5.Text);
-					mod = Convert.ToInt64(textBox6.Text);
+					d = BigInteger.Parse(textBox5.Text);
+					mod = BigInteger.Parse(textBox6.Text);
 				}
 				else
 				{
-					d = Convert.ToInt64(textBox12.Text);
-					mod = Convert.ToInt64(textBox13.Text);
+					d = BigInteger.Parse(textBox12.Text);
+					mod = BigInteger.Parse(textBox13.Text);
 				}
 				StringBuilder encryptedMessage = new StringBuilder();
 				encryptedMessage.Append(textBox10.Text);
@@ -126,8 +133,9 @@ namespace RSA
 		{
 
 		}
-		private StringBuilder RSAEncode(string s, long e, long n)
+		private StringBuilder RSAEncode(string s, BigInteger e, BigInteger n)
 		{
+			textBox9.Text = "ТУТ";
 			StringBuilder result = new StringBuilder();
 
 			BigInteger bi;
@@ -150,27 +158,20 @@ namespace RSA
 			return result;
 		}
 
-		private string RSADecode(StringBuilder input, long d, long n)
+		private string RSADecode(StringBuilder input, BigInteger d, BigInteger n)
 		{
 			StringBuilder result = new StringBuilder();
 
 			string[] values = input.ToString().Split(' ');
 
-			BigInteger bi;
-
 			foreach (string item in values)
 			{
-				double value;
-				if (double.TryParse(item, out value))
+				BigInteger bi;
+				if (BigInteger.TryParse(item, out bi))
 				{
-					bi = new BigInteger(value);
-					bi = BigInteger.Pow(bi, (int)d);
+					bi = BigInteger.ModPow(bi, d, n);
 
-					BigInteger n_ = new BigInteger((int)n);
-
-					bi = bi % n_;
-
-					int index = Convert.ToInt32(bi.ToString());
+					int index = (int)bi;
 
 					result.Append(alphabet[index]);
 				}
