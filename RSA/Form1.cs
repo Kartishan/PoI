@@ -135,28 +135,17 @@ namespace RSA
 		}
 		private StringBuilder RSAEncode(string s, BigInteger e, BigInteger n)
 		{
-			textBox9.Text = "ТУТ";
 			StringBuilder result = new StringBuilder();
-
-			BigInteger bi;
-
 			for (int i = 0; i < s.Length; i++)
 			{
-				int index = Array.IndexOf(alphabet, s[i]);
-
-				bi = new BigInteger(index);
-				bi = BigInteger.Pow(bi, (int)e);
-
-				BigInteger n_ = new BigInteger((int)n);
-
-				bi = bi % n_;
-
+				BigInteger index = Array.IndexOf(alphabet, s[i]);
+				BigInteger bi = BigInteger.ModPow(index, e, n);
 				result.Append(bi.ToString());
 				result.Append(" ");
 			}
-
 			return result;
 		}
+
 
 		private string RSADecode(StringBuilder input, BigInteger d, BigInteger n)
 		{

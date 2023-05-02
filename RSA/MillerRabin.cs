@@ -14,7 +14,6 @@ namespace lab3
 	{
 		public static bool MillerRabinTest(BigInteger numberToTest, int numberOfTests)
 		{
-			if (numberToTest == 2) return true;
 			if (numberToTest < 2 || numberToTest % 2 == 0)
 			{
 				return false;
