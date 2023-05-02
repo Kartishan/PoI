@@ -43,7 +43,7 @@ namespace RSA
 				textBox6.Text = mod.ToString();
 				textBox7.Text = mod.ToString();
 				string message = textBox8.Text.ToUpper();
-				StringBuilder encryptedMessage = RSA_Encode(message, _e, mod);
+				StringBuilder encryptedMessage = RSAEncode(message, _e, mod);
 				textBox9.Text = (encryptedMessage.ToString());
 			}
 			catch
@@ -99,27 +99,34 @@ namespace RSA
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			long d, mod;
-			if (textBox12.Text.Length == 0 || textBox13.Text.Length == 0)
+			try
 			{
-				 d = Convert.ToInt64(textBox5.Text);
-				 mod = Convert.ToInt64(textBox6.Text);
+				long d, mod;
+				if (textBox12.Text.Length == 0 || textBox13.Text.Length == 0)
+				{
+					d = Convert.ToInt64(textBox5.Text);
+					mod = Convert.ToInt64(textBox6.Text);
+				}
+				else
+				{
+					d = Convert.ToInt64(textBox12.Text);
+					mod = Convert.ToInt64(textBox13.Text);
+				}
+				StringBuilder encryptedMessage = new StringBuilder();
+				encryptedMessage.Append(textBox10.Text);
+				string decryptedMessage = RSADecode(encryptedMessage, d, mod);
+				textBox11.Text = (decryptedMessage);
 			}
-			else
+			catch
 			{
-				 d = Convert.ToInt64(textBox12.Text);
-				 mod = Convert.ToInt64(textBox13.Text);
+				MessageBox.Show("Проверьте правильность текста для шифрования");
 			}
-			StringBuilder encryptedMessage = new StringBuilder();
-			encryptedMessage.Append(textBox10.Text);
-			string decryptedMessage = RSA_Decode(encryptedMessage, d, mod);
-			textBox11.Text = (decryptedMessage);
 		}
 		private void Form1_Load(object sender, EventArgs e)
 		{
 
 		}
-		private StringBuilder RSA_Encode(string s, long e, long n)
+		private StringBuilder RSAEncode(string s, long e, long n)
 		{
 			StringBuilder result = new StringBuilder();
 
@@ -143,7 +150,7 @@ namespace RSA
 			return result;
 		}
 
-		private string RSA_Decode(StringBuilder input, long d, long n)
+		private string RSADecode(StringBuilder input, long d, long n)
 		{
 			StringBuilder result = new StringBuilder();
 

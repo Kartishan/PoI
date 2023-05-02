@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\RSA\\RSA.csproj": {}
+    "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\ZI\\PoI\\RSA\\RSA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\RSA\\RSA.csproj": {
+    "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\ZI\\PoI\\RSA\\RSA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\RSA\\RSA.csproj",
+        "projectUniqueName": "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\ZI\\PoI\\RSA\\RSA.csproj",
         "projectName": "RSA",
-        "projectPath": "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\RSA\\RSA.csproj",
+        "projectPath": "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\ZI\\PoI\\RSA\\RSA.csproj",
         "packagesPath": "C:\\Users\\iiigg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\RSA\\obj\\",
+        "outputPath": "C:\\Users\\iiigg\\OneDrive\\Рабочий стол\\учёба\\Univer\\ZI\\PoI\\RSA\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
