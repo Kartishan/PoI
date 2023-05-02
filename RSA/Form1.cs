@@ -64,7 +64,7 @@ namespace RSA
 			{
 				rng.GetBytes(data);
 				result = new BigInteger(data);
-			} while (result < min || result >= max);
+			} while (result <= min || result >= max);
 
 			return result;
 		}
