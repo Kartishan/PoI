@@ -71,18 +71,31 @@ namespace RSA
 
 		private BigInteger FindE(BigInteger n)
 		{
-			BigInteger e = RandomBI(2,n);
+			BigInteger e = RandomBI(2, n);
 
-			for (BigInteger i = 2; i < n; i++)
+			while (true)
 			{
-				if ((n % i == 0) && (e % i == 0))
+				if (Gcd(e, n) == 1)
+				{
+					return e;
+				}
+				else
 				{
 					e = RandomBI(2, n);
-					i = 1;
 				}
 			}
+		}
 
-			return e;
+		//НОД
+		public static BigInteger Gcd(BigInteger a, BigInteger b)
+		{
+			while (b != 0)
+			{
+				BigInteger t = b;
+				b = a % b;
+				a = t;
+			}
+			return a;
 		}
 
 		private BigInteger FindD(BigInteger e, BigInteger n)
@@ -141,7 +154,6 @@ namespace RSA
 				BigInteger index = Array.IndexOf(alphabet, s[i]);
 				BigInteger bi = BigInteger.ModPow(index, e, n);
 				result.Append(bi.ToString());
-				result.Append(" ");
 			}
 			return result;
 		}
